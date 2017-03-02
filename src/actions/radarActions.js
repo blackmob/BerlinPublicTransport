@@ -1,7 +1,7 @@
 import {
     GET_RADAR_DATA,
     GET_RADAR_DATA_ERROR,
-    GET_RADAR_DATA_RECEIVED
+    GET_RADAR_DATA_RECEIVED,
 } from '../constants/actionTypes';
 
 import { createAction } from 'redux-actions';
@@ -22,7 +22,7 @@ export const fetchRadarData = () => {
         dispatch(getRadarData());
         const state = getState();
         const rect = state.map.boundingRect;
-        return fetch(`https://transport.rest/radar?north=${rect.north}&west=${rect.west}}&south=${rect.south}&east=${rect.east}`).then((results)=>{   
+        return fetch(`https://transport.rest/radar?north=${rect.f.b}&west=${rect.b.b}&south=${rect.f.f}&east=${rect.b.f}`).then((results)=>{   
             return results.json().then((r)=>{
                 return dispatch(getRadarDataReceived(r));
             });

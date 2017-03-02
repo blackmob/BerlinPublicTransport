@@ -1,37 +1,20 @@
-import * as actions from '../actions/radarActions';
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+
 import MapContainer from './MapContainer';
 import {Marker} from 'google-maps-react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 class CurrentStatus extends Component {
 
-    componentDidMount() {
-        this.props.actions.fetchRadarData();
-    }
-
-    onClick = (city) => {
-
-    }
-
     render() {
         const { actions, radar } = this.props;
-        return <MapContainer>
+        return <MapContainer onFetchData={this.props.onFetchData}>
             {radar.map((item) => {
                 return <Marker name={item.direction} position={{lat: item.latitude, lng: item.longitude}} />               
             })}
-        </MapContainer>
-        
+        </MapContainer>        
     }
-
-
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(actions, dispatch)
-    };
 }
 
 function mapStateToProps(state) {
@@ -40,4 +23,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentStatus);
+export default connect(mapStateToProps, null)(CurrentStatus);
